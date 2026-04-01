@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://bni3l28ymp62s"]
+
+[ext_resource type="Texture2D" uid="uid://dwm6lhw7uny5x" path="res://UI/Cardbored2.jpg" id="1_60uel"]
+[ext_resource type="FontFile" uid="uid://epn63kka4nlp" path="res://UI/somerset-barnyard-font/misc/Somerset Barnyard-5adc.woff" id="2_l7ll2"]
+[ext_resource type="Texture2D" uid="uid://erv07ect5trr" path="res://UI/ButtonCardboardTransparent.png" id="3_g2u6n"]
+[ext_resource type="Script" uid="uid://ctd7u0s1ndl5j" path="res://Maps/card_bord_button.gd" id="4_18qut"]
+[ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="5_0mrxx"]
+[ext_resource type="AudioStream" uid="uid://b4k1wtsfdwlvd" path="res://Sound/firstwedropthenweboxmaster.ogg" id="6_l7ll2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_23iee"]
+font_size = 102
+font_color = Color(0, 0, 0, 1)
+outline_size = 32
+
+[node name="Control" type="Control" unique_id=1969438470]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=69903090]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_60uel")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1699702281]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -277.0
+offset_top = 56.0
+offset_right = 277.5
+offset_bottom = 248.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 19
+theme_override_fonts/normal_font = ExtResource("2_l7ll2")
+theme_override_font_sizes/normal_font_size = 93
+bbcode_enabled = true
+text = "Dropped In The Box"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton" type="TextureButton" parent="." unique_id=1820977270]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -62.0
+offset_right = 457.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_g2u6n")
+script = ExtResource("4_18qut")
+levelstring = "res://Maps/main_game.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton" unique_id=1660829489]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_0mrxx")
+theme_override_font_sizes/font_size = 102
+text = "Play"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton2" type="TextureButton" parent="." unique_id=1113670818]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 65.0
+offset_right = 457.0
+offset_bottom = 425.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_g2u6n")
+script = ExtResource("4_18qut")
+levelstring = "res://Maps/Credits.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton2" unique_id=1205654424]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_0mrxx")
+theme_override_font_sizes/font_size = 102
+text = "Credits"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton3" type="TextureButton" parent="." unique_id=603931797]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 173.0
+offset_right = 457.0
+offset_bottom = 533.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_g2u6n")
+script = ExtResource("4_18qut")
+levelstring = "res://Maps/controls.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton3" unique_id=786558448]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.3333333
+offset_bottom = 3.3333435
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_0mrxx")
+theme_override_font_sizes/font_size = 102
+text = "Controls"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1552856113]
+stream = ExtResource("6_l7ll2")
+volume_db = -34.769
+autoplay = true
+
+[connection signal="pressed" from="CardBordButton" to="CardBordButton" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton2" to="CardBordButton2" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton3" to="CardBordButton3" method="_on_pressed"]

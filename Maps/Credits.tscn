@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://cmm15dp0qruad"]
+
+[ext_resource type="Texture2D" uid="uid://dwm6lhw7uny5x" path="res://UI/Cardbored2.jpg" id="1_7e127"]
+[ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="2_ey7ie"]
+[ext_resource type="Texture2D" uid="uid://erv07ect5trr" path="res://UI/ButtonCardboardTransparent.png" id="3_wtov3"]
+[ext_resource type="Script" uid="uid://ctd7u0s1ndl5j" path="res://Maps/card_bord_button.gd" id="4_wio7a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p2c84"]
+font_size = 102
+font_color = Color(0, 0, 0, 1)
+outline_size = 32
+
+[node name="Controls" type="Control" unique_id=1606584057]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=906510816]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7e127")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=649502238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_ey7ie")
+theme_override_font_sizes/normal_font_size = 44
+text = "Programing and Designe by HanSolo15e.
+Music and Video by Kemunian.
+Some 3D Assets from Pollyhaven, others are custom."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton3" type="TextureButton" parent="." unique_id=1353559343]
+layout_mode = 1
+offset_left = 18.0
+offset_top = -3.0
+offset_right = 558.0
+offset_bottom = 357.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_wtov3")
+script = ExtResource("4_wio7a")
+levelstring = "res://Maps/MainMenue.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton3" unique_id=876786485]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.3333333
+offset_bottom = 3.3333435
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ey7ie")
+theme_override_font_sizes/font_size = 102
+text = "Back"
+label_settings = SubResource("LabelSettings_p2c84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CardBordButton3" to="CardBordButton3" method="_on_pressed"]

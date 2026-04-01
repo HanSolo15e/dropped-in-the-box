@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://do34j5qi1nnnr"]
+
+[ext_resource type="Texture2D" uid="uid://erv07ect5trr" path="res://UI/ButtonCardboardTransparent.png" id="1_7iqnc"]
+[ext_resource type="Script" uid="uid://ooge41mowuwe" path="res://Scripts/game_over.gd" id="1_kjwww"]
+[ext_resource type="Texture2D" uid="uid://dwm6lhw7uny5x" path="res://UI/Cardbored2.jpg" id="2_2b7vw"]
+[ext_resource type="Script" uid="uid://ctd7u0s1ndl5j" path="res://Maps/card_bord_button.gd" id="2_4mgqu"]
+[ext_resource type="AudioStream" uid="uid://2ptj178aqvp1" path="res://Sound/win.ogg" id="2_6475x"]
+[ext_resource type="FontFile" uid="uid://epn63kka4nlp" path="res://UI/somerset-barnyard-font/misc/Somerset Barnyard-5adc.woff" id="2_mmm0j"]
+[ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="2_yk5ye"]
+[ext_resource type="Texture2D" uid="uid://ckn8lmulipirr" path="res://UI/cardboardButton Background Removed.png" id="3_dwqc2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mgqu"]
+font_size = 102
+font_color = Color(0, 0, 0, 1)
+outline_size = 32
+
+[node name="Control" type="Control" unique_id=788945353]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kjwww")
+
+[node name="WinSound" type="AudioStreamPlayer" parent="." unique_id=1677636427]
+stream = ExtResource("2_6475x")
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="." unique_id=1035609464]
+stream = ExtResource("2_6475x")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=313146214]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2b7vw")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="StatsBox" type="TextureRect" parent="." unique_id=9237343]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 628.0
+offset_right = 605.0
+offset_bottom = 1036.0
+rotation = 4.712389
+scale = Vector2(0.8352769, 1.076207)
+texture = ExtResource("3_dwqc2")
+
+[node name="OtherText" type="Label" parent="StatsBox" unique_id=332880556]
+layout_mode = 0
+offset_left = 532.75745
+offset_top = 71.547554
+offset_right = 700.75745
+offset_bottom = 142.54756
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 68
+text = "Stats:"
+
+[node name="BoxesCompletedValue" type="Label" parent="StatsBox" unique_id=770518863]
+layout_mode = 0
+offset_left = 357.96515
+offset_top = 246.23515
+offset_right = 525.96515
+offset_bottom = 317.23517
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="BoxesCompletedText" type="Label" parent="StatsBox" unique_id=1970890359]
+layout_mode = 0
+offset_left = 360.35956
+offset_top = 73.40596
+offset_right = 528.35956
+offset_bottom = 144.40598
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "Boxes Packed:"
+
+[node name="BoxFillValue" type="Label" parent="StatsBox" unique_id=1145790161]
+layout_mode = 0
+offset_left = 281.3438
+offset_top = 290.83627
+offset_right = 449.3438
+offset_bottom = 361.8363
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="BoxFillText" type="Label" parent="StatsBox" unique_id=841892978]
+layout_mode = 0
+offset_left = 283.73822
+offset_top = 65.972435
+offset_right = 504.73822
+offset_bottom = 136.97244
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "Packing Efficiency:"
+
+[node name="ScoreText" type="Label" parent="StatsBox" unique_id=258232426]
+layout_mode = 0
+offset_left = 434.58643
+offset_top = 73.40596
+offset_right = 602.5864
+offset_bottom = 144.40596
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "Score:"
+
+[node name="ScoreTextValue" type="Label" parent="StatsBox" unique_id=96780758]
+layout_mode = 0
+offset_left = 434.58643
+offset_top = 157.03299
+offset_right = 602.5864
+offset_bottom = 228.03299
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1257769167]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -277.0
+offset_right = 277.5
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_mmm0j")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave amp=80.0 freq=10.0]GAME OVER[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1197850737]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -277.25
+offset_top = 79.0
+offset_right = 277.25
+offset_bottom = 271.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_mmm0j")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "Dont Drop Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton" type="TextureButton" parent="." unique_id=1375144714]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -87.0
+offset_right = 432.0
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("1_7iqnc")
+script = ExtResource("2_4mgqu")
+levelstring = "res://Maps/main_game.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton" unique_id=2084686030]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 102
+text = "Play Again"
+label_settings = SubResource("LabelSettings_4mgqu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton2" type="TextureButton" parent="." unique_id=1163654995]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.99997
+offset_top = 77.0
+offset_right = 432.0
+offset_bottom = 437.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("1_7iqnc")
+script = ExtResource("2_4mgqu")
+levelstring = "res://Maps/MainMenue.tscn"
+
+[node name="Label" type="Label" parent="CardBordButton2" unique_id=925930797]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_yk5ye")
+theme_override_font_sizes/font_size = 102
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_4mgqu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CardBordButton" to="CardBordButton" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton2" to="CardBordButton2" method="_on_pressed"]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d00xq74w4f46l"]
+
+[ext_resource type="Script" uid="uid://b0ywrs4pf228v" path="res://Items/shiping_item_1.gd" id="1_8xw6s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jtshw"]
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtshw"]
+size = Vector3(0.11, 0.11, 0.11)
+
+[sub_resource type="BoxMesh" id="BoxMesh_62p2f"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jtshw"]
+points = PackedVector3Array(0.05, 0.05, 0.05, 0.05, 0.05, -0.05, -0.05, 0.05, 0.05, 0.05, -0.05, 0.05, 0.05, -0.05, -0.05, -0.05, 0.05, -0.05, -0.05, -0.05, 0.05, -0.05, -0.05, -0.05)
+
+[node name="Shipping_Item" type="RigidBody3D" unique_id=1919472738]
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_jtshw")
+can_sleep = false
+freeze_mode = 1
+angular_damp = 10.0
+script = ExtResource("1_8xw6s")
+Size = null
+model = "res://Models/Items/Models/multi_cleaner_5_litre.glb"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=804660776]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1919929579]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+shape = SubResource("BoxShape3D_jtshw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1207196290]
+mesh = SubResource("BoxMesh_62p2f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1118605988]
+shape = SubResource("ConvexPolygonShape3D_jtshw")

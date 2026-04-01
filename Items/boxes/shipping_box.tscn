@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cutejoujyxjam"]
+
+[ext_resource type="Script" uid="uid://bd2iqn3ko8nko" path="res://Scripts/box.gd" id="1_7hm58"]
+[ext_resource type="PackedScene" uid="uid://b8q7svnlbnm2h" path="res://Models/Boxes/Box1.glb" id="2_h3fal"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h5wge"]
+size = Vector3(0.6516113, 0.4041748, 0.5253906)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h3fal"]
+size = Vector3(1, 0.25280762, 1)
+
+[node name="ShippingBox" type="RigidBody3D" unique_id=1589262552]
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_7hm58")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=655249586]
+
+[node name="Box1" parent="." unique_id=2107927445 instance=ExtResource("2_h3fal")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1240965194]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=649361549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018310547, -0.011413574, 0)
+shape = SubResource("BoxShape3D_h5wge")
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=655848867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4126917, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=501898134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018310547, -0.029052734, 0)
+shape = SubResource("BoxShape3D_h3fal")

@@ -1,0 +1,487 @@
+[gd_scene format=3 uid="uid://bmcts7wbhx5qw"]
+
+[ext_resource type="Script" uid="uid://bgp1b7nhi37d7" path="res://Maps/main_game.gd" id="1_nsa0c"]
+[ext_resource type="AudioStream" uid="uid://b4k1wtsfdwlvd" path="res://Sound/firstwedropthenweboxmaster.ogg" id="2_xbsuh"]
+[ext_resource type="Script" uid="uid://b6sj1tsi2xolb" path="res://Maps/Conveyer.gd" id="2_xdrmq"]
+[ext_resource type="Script" uid="uid://bf1r01r2xj7b7" path="res://Scripts/trash.gd" id="3_nsa0c"]
+[ext_resource type="PackedScene" uid="uid://cuwgsewqgtjr1" path="res://Models/Other/BeltModel.glb" id="4_gwpp0"]
+[ext_resource type="Script" uid="uid://hhi2rwpe13rl" path="res://Scripts/progress_bar.gd" id="4_slpp8"]
+[ext_resource type="Texture2D" uid="uid://ckn8lmulipirr" path="res://UI/cardboardButton Background Removed.png" id="5_5l80t"]
+[ext_resource type="PackedScene" uid="uid://1ao6em1jj58j" path="res://Models/Other/Rail.glb" id="5_6v1d1"]
+[ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_354uh"]
+[ext_resource type="PackedScene" uid="uid://5m31hl3f2bve" path="res://Models/Other/Shoot.glb" id="9_354uh"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_354uh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_punsg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_2hvsv"]
+sky_material = SubResource("ProceduralSkyMaterial_punsg")
+
+[sub_resource type="Environment" id="Environment_xdrmq"]
+background_mode = 2
+sky = SubResource("Sky_2hvsv")
+tonemap_mode = 4
+ssr_enabled = true
+ssao_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6v1d1"]
+size = Vector3(3.0131226, 0.5810547, 1.125)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xdrmq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l80t"]
+bg_color = Color(0.99999994, 0.14328519, 0.1680153, 0)
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 100
+border_color = Color(1, 1, 1, 0.42745098)
+border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_xdrmq"]
+font = ExtResource("6_354uh")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+outline_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slpp8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xdrmq"]
+friction = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwpp0"]
+size = Vector3(1, 0.59451294, 5.9001465)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_354uh"]
+albedo_color = Color(0.22490484, 0.22490484, 0.22490484, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_354uh"]
+material = SubResource("StandardMaterial3D_354uh")
+size = Vector2(50, 50)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_354uh"]
+top_radius = 0.2
+bottom_radius = 0.2
+
+[node name="MainGame" type="Node3D" unique_id=1249565555]
+script = ExtResource("1_nsa0c")
+BaseItemNum = 10
+RoundBoxes = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=285724018]
+stream = ExtResource("2_xbsuh")
+volume_db = -10.965
+autoplay = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=923763964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9675281, 0)
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1152379076]
+shape = SubResource("WorldBoundaryShape3D_354uh")
+
+[node name="BoxPlayPos" type="Node3D" parent="." unique_id=229041474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017980456, 0.0929386, 0.91459775)
+
+[node name="BoxSpawn" type="Node3D" parent="." unique_id=653085358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4445658, 0.0929386, 0.91459775)
+
+[node name="GameTimer" type="Timer" parent="." unique_id=1289140452]
+wait_time = 60.0
+one_shot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=717211052]
+environment = SubResource("Environment_xdrmq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=515908206]
+transform = Transform3D(-0.8783625, -0.47422287, 0.059936743, -0.022381607, 0.16605805, 0.98586214, -0.47747123, 0.8646025, -0.15647297, 0, 0, 0)
+visible = false
+shadow_enabled = true
+directional_shadow_split_1 = 0.026
+directional_shadow_split_2 = 0.245
+directional_shadow_blend_splits = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1981146416]
+transform = Transform3D(1, 0, 0, 0, 0.33988717, 0.9404663, 0, -0.9404663, 0.33988717, 0, 3.5255032, 1.609525)
+fov = 45.5
+near = 0.12
+
+[node name="ItemSpawnPoint" type="Node3D" parent="." unique_id=337310994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0892274, 2.0137959, -0.40178043)
+
+[node name="ConveyerArea" type="Area3D" parent="." unique_id=787198686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2777192, 0.37307572, -0.22857893)
+collision_mask = 2
+script = ExtResource("2_xdrmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConveyerArea" unique_id=1739399557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7345276, -0.20947266, -0.0625)
+shape = SubResource("BoxShape3D_6v1d1")
+
+[node name="Trash" type="Area3D" parent="." unique_id=1112364345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.855023, 0, -0.33495557)
+collision_mask = 2
+script = ExtResource("3_nsa0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash" unique_id=2070483410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8023497, -1.5877742, 0)
+shape = SubResource("WorldBoundaryShape3D_xdrmq")
+
+[node name="Control" type="Control" parent="." unique_id=1969397313]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+mouse_filter = 1
+
+[node name="Warning" type="Panel" parent="Control" unique_id=2075733242]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_5l80t")
+
+[node name="StatsBox2" type="TextureRect" parent="Control" unique_id=1537392096]
+layout_mode = 1
+offset_left = -147.0
+offset_top = -130.0
+offset_right = 465.00006
+offset_bottom = 278.0
+scale = Vector2(0.605, 0.78)
+texture = ExtResource("5_5l80t")
+
+[node name="ScoreLable" type="Label" parent="Control" unique_id=1745655783]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 6.0
+offset_right = 131.0
+offset_bottom = 143.0
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_xdrmq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxLable" type="Label" parent="Control" unique_id=606145427]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -137.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_xdrmq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control" unique_id=95138709]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+grow_horizontal = 0
+grow_vertical = 2
+fill_mode = 3
+show_percentage = false
+script = ExtResource("4_slpp8")
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1682446134]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slpp8")
+
+[node name="StatsBox" type="TextureRect" parent="Control" unique_id=334437870]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+offset_top = 161.00006
+offset_right = 293.0
+offset_bottom = 569.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 4.712389
+scale = Vector2(0.605, 0.78)
+texture = ExtResource("5_5l80t")
+
+[node name="OtherText" type="Label" parent="Control/StatsBox" unique_id=5775557]
+layout_mode = 0
+offset_left = 532.75745
+offset_top = 71.547554
+offset_right = 700.75745
+offset_bottom = 142.54756
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 68
+text = "Quota:"
+
+[node name="BoxesCompletedValue" type="Label" parent="Control/StatsBox" unique_id=1309784556]
+layout_mode = 0
+offset_left = 381.8182
+offset_top = 252.56404
+offset_right = 549.8182
+offset_bottom = 323.5641
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="BoxesCompletedText" type="Label" parent="Control/StatsBox" unique_id=568082172]
+layout_mode = 0
+offset_left = 385.12393
+offset_top = 66.666664
+offset_right = 561.12396
+offset_bottom = 137.66669
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "Boxes To Pack:"
+
+[node name="BoxFillValue" type="Label" parent="Control/StatsBox" unique_id=452982750]
+layout_mode = 0
+offset_left = 441.32233
+offset_top = 300.0
+offset_right = 609.3223
+offset_bottom = 371.00003
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="BoxFillText" type="Label" parent="Control/StatsBox" unique_id=639049745]
+layout_mode = 0
+offset_left = 442.97522
+offset_top = 65.38462
+offset_right = 663.9752
+offset_bottom = 136.38463
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "Efficiency Required:"
+
+[node name="ShiftNumValue" type="Label" parent="Control/StatsBox" unique_id=1930159359]
+layout_mode = 0
+offset_left = 330.57852
+offset_top = 248.71794
+offset_right = 498.57852
+offset_bottom = 319.71796
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="ShiftNumText" type="Label" parent="Control/StatsBox" unique_id=1140585965]
+layout_mode = 0
+offset_left = 332.2314
+offset_top = 65.38462
+offset_right = 564.23145
+offset_bottom = 136.38463
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_354uh")
+theme_override_font_sizes/font_size = 30
+text = "Shift Number:"
+
+[node name="Level" type="Node3D" parent="." unique_id=1699124334]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.5903614, 0.3292787, -0.33030528)
+
+[node name="Belt" type="Node3D" parent="Level" unique_id=1893640087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.55775166)
+
+[node name="BeltModel" parent="Level/Belt" unique_id=335320967 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, -1.1132693e-08, -1.441439e-09, 1.1132693e-08, 0.96702373, 0.25468633, -1.441439e-09, -0.25468633, 0.96702373, -0.01124078, 0.2420001, 3.0697849)
+
+[node name="BeltModel4" parent="Level/Belt" unique_id=2021460691 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, -1.1132693e-08, -1.441439e-09, 1.1132693e-08, 0.96702373, 0.25468633, -1.441439e-09, -0.25468633, 0.96702373, -0.011376977, 0.6632441, 4.8351965)
+
+[node name="BeltModel2" parent="Level/Belt" unique_id=2046958345 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0112409, -0.03223604, 1.1069576)
+
+[node name="BeltModel3" parent="Level/Belt" unique_id=2081279499 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.44049013, -0.01124087, -0.03223604, -0.33800554)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/Belt" unique_id=1764687722]
+physics_material_override = SubResource("PhysicsMaterial_xdrmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Belt/StaticBody3D" unique_id=1871992910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9604645e-08, -0.20274353, 1.0804443)
+shape = SubResource("BoxShape3D_gwpp0")
+
+[node name="Rail" parent="Level" unique_id=422603112 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, -0.48591572, 0.28946894, 3.5923228)
+
+[node name="Rail2" parent="Level" unique_id=1909738203 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, -0.48591578, 0.022635937, 1.157808)
+
+[node name="Rail10" parent="Level" unique_id=612674243 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(1.3072759e-07, 0.09436875, -0.5371067, -8.421626e-09, 0.9750621, 0.051982418, 1, -4.124989e-09, 7.065243e-08, -0.037040383, 0.024115443, -0.25566483)
+
+[node name="Rail7" parent="Level" unique_id=691046326 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52457666, 0.20708561, 3.61402)
+
+[node name="Rail3" parent="Level" unique_id=319560536 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, -0.48605198, 0.7107129, 5.3577337)
+
+[node name="Rail9" parent="Level" unique_id=1973584644 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52444035, 0.62832963, 5.3794317)
+
+[node name="Rail8" parent="Level" unique_id=771398954 instance=ExtResource("5_6v1d1")]
+transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, 0.5900496, -0.06255674, 1.157808)
+
+[node name="Belt2" type="Node3D" parent="Level" unique_id=516513564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8278995, 0.15300322, 0.55775154)
+
+[node name="BeltModel2" parent="Level/Belt2" unique_id=1731988917 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5726252, -0.8832102, 1.1069578)
+
+[node name="BeltModel3" parent="Level/Belt2" unique_id=2126682635 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57262534, -0.8832102, -0.878633)
+
+[node name="BeltModel7" parent="Level/Belt2" unique_id=1267810230 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5726254, -0.8832102, -2.8716798)
+
+[node name="BeltModel8" parent="Level/Belt2" unique_id=2078147180 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5726255, -0.8832102, -4.8572702)
+
+[node name="BeltModel4" parent="Level/Belt2" unique_id=1361030538 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5726253, -0.8832102, 3.0759797)
+
+[node name="BeltModel5" parent="Level/Belt2" unique_id=1946635008 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57262516, -0.8832102, 5.0567074)
+
+[node name="BeltModel6" parent="Level/Belt2" unique_id=1985743193 instance=ExtResource("4_gwpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5726252, -0.8832102, 7.025729)
+
+[node name="Shoot" parent="Level" unique_id=1171522810 instance=ExtResource("9_354uh")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.054867595, 1.5500706, 3.6509347)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level" unique_id=874197318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8479819, -1.663256, 1.2400904)
+mesh = SubResource("PlaneMesh_354uh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Level" unique_id=1134105955]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 0.0054718554, -0.69511247, 4.018049)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Level" unique_id=1949115393]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733281, -1.8021767, 4.018049)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Level" unique_id=1720377257]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733281, -1.8021767, 2.7503507)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Level" unique_id=159132158]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733281, -1.8021767, 1.6106594)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Level" unique_id=19823176]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.273328, -1.8021767, 0.50597703)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Level" unique_id=1162629651]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733278, -1.8021767, -0.56634283)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Level" unique_id=537465658]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733281, -1.8021767, 5.0635304)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Level" unique_id=959016266]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 1.2733281, -1.8021767, 6.273553)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Level" unique_id=559433132]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 0.0054717064, -1.0117838, 1.8881917)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Level" unique_id=1438043266]
+transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 0.005471617, -1.0117838, 0.0018436909)
+mesh = SubResource("CylinderMesh_354uh")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1168886877]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.0384388, -0.3248335)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=162769386]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2343323, 2.0384388, -0.3248335)
+light_energy = 3.87
+spot_angle = 43.199375
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=1495058247]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.0214162, 2.0384388, -0.3248335)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="." unique_id=760740065]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.868517, 2.0384388, -0.3248335)
+light_energy = 3.87
+spot_angle = 43.199375
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=2100759000]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.0214162, 2.0384388, 1.037315)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="." unique_id=2012045406]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.5141189, 2.6111915, -0.15637624)
+light_energy = 3.87
+spot_angle = 43.199375
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="." unique_id=1846873439]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.7952714, 2.6111915, -0.15637624)
+light_energy = 3.87
+spot_angle = 43.199375
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="." unique_id=968302238]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.086988926, 1.8132858, 1.0712017)
+light_energy = 3.03
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="." unique_id=1085345927]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.1252446, 2.0384388, 1.037315)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[connection signal="body_entered" from="Trash" to="." method="_on_trash_body_entered"]
