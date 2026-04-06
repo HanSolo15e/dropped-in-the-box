@@ -1,5 +1,5 @@
 # Dropped In The Box
-[![GitHub Release](https://img.shields.io/github/v/release/HanSolo15e/dropped-in-the-box?include_prereleases&color=blue)](https://github.com/HanSolo15e/dropped-in-the-box/releases)
+Download Newest version: [![GitHub Release](https://img.shields.io/github/v/release/HanSolo15e/dropped-in-the-box?include_prereleases&color=blue)](https://github.com/HanSolo15e/dropped-in-the-box/releases)
 
 Made for the 2026 BadIdeas GameJAM, Dropped In The Box is a physics puzzle game.
 
