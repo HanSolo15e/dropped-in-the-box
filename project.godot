@@ -12,7 +12,7 @@ config_version=5
 
 config/name="DroppedInTheBox"
 config/version="1.2"
-run/main_scene="uid://bni3l28ymp62s"
+run/main_scene="uid://bmcts7wbhx5qw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dlxc3hl65glln"
 
@@ -80,3 +80,8 @@ anti_aliasing/quality/msaa_3d=2
 scaling_3d/mode=1
 scaling_3d/mode.macos=1
 scaling_3d/scale=0.5
+
+[xr]
+
+openxr/enabled=true
+shaders/enabled=true

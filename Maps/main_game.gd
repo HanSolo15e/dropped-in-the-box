@@ -3,6 +3,7 @@ extends Node3D
 #this code made me not want to kill myself... i made me see life as amzing and fuffiling 
 #i got guns in my head
 
+var xr_interface: XRInterface
 
 @onready var conveyer_area: Area3D = $ConveyerArea
 @onready var box_play_pos: Node3D = $BoxPlayPos
@@ -51,6 +52,22 @@ signal BoxScored(Failed: bool, points: int)
 
 
 func _ready() -> void:
+	#OpenXR and VR stuff
+	xr_interface = XRServer.find_interface("OpenXR")
+	if xr_interface and xr_interface.is_initialized():
+		print("OpenXR initialized successfully")
+
+		# Turn off v-sync!
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+		# Change our main viewport to output to the HMD
+		get_viewport().use_xr = true
+	else:
+		print("OpenXR not initialized, please check if your headset is connected")
+	
+	
+	
+	
 	conveyer_area.AddBoxToArray.connect(addtoarray)
 	Init_Game() 
 	
