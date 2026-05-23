@@ -1,3 +1,11 @@
-*.cache
-/.godot
+# Godot specific ignores
 .godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Android/Build ignores
+android/build/
+*.apk
+*.aab
+*.binary

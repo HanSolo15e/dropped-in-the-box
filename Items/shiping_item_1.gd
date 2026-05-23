@@ -18,19 +18,18 @@ var IsHover: bool = false
 func _ready() -> void:
 	area_3d.input_event.connect(_clicked)
 	
-	
 	if model:
-		var imported_scene = load(model).instantiate()
-		var mesh_nodes = imported_scene.find_children("*", "MeshInstance3D", true)
+		# Ask the library for the pre-processed data
+		var data = PropLibrary.get_model_data(model)
 		
-		if mesh_nodes.size() > 0:
-			var target_mesh = mesh_nodes[0].mesh
-			mesh_instance.mesh = target_mesh
+		if data.has("mesh"):
+			# Set the shared resources
+			mesh_instance.mesh = data["mesh"]
 			
-			collision_shape.shape = target_mesh.create_convex_shape(true, true) 
-			collision_shape_3d.shape = target_mesh.create_convex_shape(true, true) 
-			
-		imported_scene.queue_free()
+			# Use the SAME shape resource for both
+			# (Godot handles this efficiently)
+			collision_shape.shape = data["shape"]
+			collision_shape_3d.shape = data["shape"]
 
 func _process(delta: float) -> void:
 	pass

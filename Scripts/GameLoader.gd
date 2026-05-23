@@ -2,6 +2,7 @@ extends Node
 
 var _target_scene_path: String = ""
 var _is_loading: bool = false
+var is_mobile: bool = false
 
 var FaliedGame: bool = false
 var score: = 0
@@ -25,7 +26,7 @@ func gameover(success: bool):
 	if Lastlevel:
 		NextShiftNumber = 0
 		
-	
+	PropLibrary.clear_cache()
 
 # save for laterrr GameLoader.load_level("res://levels/big_level.tscn", "res://ui/simple_intermission.tscn")
 func load_level(target_path: String, intermediate_path: String):
@@ -35,7 +36,7 @@ func load_level(target_path: String, intermediate_path: String):
 	# Start background thread
 	ResourceLoader.load_threaded_request(target_path)
 	
-	# swaps scene ig
+	# swaps scene ig, also godot hates it and ill do it defferd later ok? ok!
 	get_tree().change_scene_to_file(intermediate_path)
 
 func _process(_delta: float) -> void:
@@ -53,3 +54,11 @@ func _process(_delta: float) -> void:
 	elif status == ResourceLoader.THREAD_LOAD_FAILED:
 		push_error("Failed to load level: " + _target_scene_path)
 		_is_loading = false
+		
+func _ready():
+	# Detect platform capabilities rather than hardcoding OS checks
+	if DisplayServer.is_touchscreen_available():
+		is_mobile = true
+	else:
+		is_mobile = false
+	print(is_mobile)

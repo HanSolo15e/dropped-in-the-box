@@ -13,6 +13,7 @@ signal TaskFinished
 
 func _ready() -> void:
 	AllProps = get_files_by_type("res://Models/Items/Models/", ".glb")
+	print(AllProps)
 	main_game_script = main_game.get_script()
 	main_game.ReplenishItems.connect(ReplenishItems)
 	self.body_entered.connect(_addForceConveyer)
