@@ -15,6 +15,14 @@ var LostItem: bool = false
 var Lastlevel: bool = false
 var boxescomplete: int = 0
 
+var IsHoldingItem: bool = false
+
+func GetHoldingState():
+	return IsHoldingItem
+	
+func HoldingItem(HoldingState: bool):
+	IsHoldingItem = HoldingState
+
 func gameover(success: bool):
 	if success:
 			NextShiftNumber += 1 
@@ -37,8 +45,8 @@ func load_level(target_path: String, intermediate_path: String):
 	ResourceLoader.load_threaded_request(target_path)
 	
 	# swaps scene ig, also godot hates it and ill do it defferd later ok? ok!
-	get_tree().change_scene_to_file(intermediate_path)
-
+	get_tree().call_deferred("change_scene_to_file",intermediate_path)
+	
 func _process(_delta: float) -> void:
 	if not _is_loading:
 		return

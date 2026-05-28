@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://1ao6em1jj58j" path="res://Models/Other/Rail.glb" id="5_6v1d1"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_354uh"]
 [ext_resource type="PackedScene" uid="uid://5m31hl3f2bve" path="res://Models/Other/Shoot.glb" id="9_354uh"]
+[ext_resource type="Texture2D" uid="uid://cutlwbbat138n" path="res://UI/RedButtonUp.png" id="11_gqg7b"]
+[ext_resource type="Texture2D" uid="uid://brk18q5tuvcr" path="res://UI/RedButtonDown.png" id="12_5qu1p"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_354uh"]
 
@@ -26,6 +28,9 @@ sky = SubResource("Sky_2hvsv")
 tonemap_mode = 4
 ssr_enabled = true
 ssao_enabled = true
+glow_strength = 0.77
+glow_bloom = 0.88
+glow_blend_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6v1d1"]
 size = Vector3(3.0131226, 0.5810547, 1.125)
@@ -50,6 +55,12 @@ outline_size = 12
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slpp8"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="InputEventAction" id="InputEventAction_gqg7b"]
+action = &"Next_Box"
+
+[sub_resource type="Shortcut" id="Shortcut_gqg7b"]
+events = [SubResource("InputEventAction_gqg7b")]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xdrmq"]
 friction = 0.05
 
@@ -66,6 +77,22 @@ size = Vector2(50, 50)
 [sub_resource type="CylinderMesh" id="CylinderMesh_354uh"]
 top_radius = 0.2
 bottom_radius = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_5qu1p"]
+
+[sub_resource type="Gradient" id="Gradient_5qu1p"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.42978725, 0.50496453, 0.5248227, 0.5929078)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_63n1s"]
+gradient = SubResource("Gradient_5qu1p")
+width = 1920
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58ql1"]
+transparency = 4
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture1D_63n1s")
 
 [node name="MainGame" type="Node3D" unique_id=1249565555]
 script = ExtResource("1_nsa0c")
@@ -317,6 +344,39 @@ theme_override_fonts/font = ExtResource("6_354uh")
 theme_override_font_sizes/font_size = 30
 text = "Shift Number:"
 
+[node name="NextBox" type="TextureRect" parent="Control" unique_id=1809754114]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -633.0
+offset_top = -321.0
+offset_right = -21.0
+offset_bottom = 87.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.661, 0.459)
+pivot_offset = Vector2(502.46802, 212.4646)
+texture = ExtResource("5_5l80t")
+
+[node name="TextureButton" type="TextureButton" parent="Control" unique_id=1494517082]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -173.0
+offset_right = 529.24
+offset_bottom = 327.0
+grow_vertical = 0
+scale = Vector2(0.26, 0.26)
+tooltip_text = "Next Box"
+shortcut = SubResource("Shortcut_gqg7b")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("11_gqg7b")
+texture_pressed = ExtResource("12_5qu1p")
+
 [node name="Level" type="Node3D" parent="." unique_id=1699124334]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.5903614, 0.3292787, -0.33030528)
 
@@ -346,22 +406,22 @@ shape = SubResource("BoxShape3D_gwpp0")
 transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, -0.48591572, 0.28946894, 3.5923228)
 
 [node name="Rail2" parent="Level" unique_id=1909738203 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, -0.48591578, 0.022635937, 1.157808)
+transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, -0.48591578, 0.048151255, 1.157808)
 
 [node name="Rail10" parent="Level" unique_id=612674243 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(1.3072759e-07, 0.09436875, -0.5371067, -8.421626e-09, 0.9750621, 0.051982418, 1, -4.124989e-09, 7.065243e-08, -0.037040383, 0.024115443, -0.25566483)
+transform = Transform3D(1.3072759e-07, 0.09436875, -0.5371067, -8.421626e-09, 0.9750621, 0.051982418, 1, -4.124989e-09, 7.065243e-08, -0.037040442, 0.0099644065, -0.2061069)
 
 [node name="Rail7" parent="Level" unique_id=691046326 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52457666, 0.20708561, 3.61402)
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52457666, 0.17620796, 3.5812268)
 
 [node name="Rail3" parent="Level" unique_id=319560536 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, -0.48605198, 0.7107129, 5.3577337)
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, -0.48605198, 0.7521657, 5.346816)
 
 [node name="Rail9" parent="Level" unique_id=1973584644 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52444035, 0.62832963, 5.3794317)
+transform = Transform3D(-1, -1.1132693e-08, -8.598134e-08, 1.1132693e-08, 0.96702373, -0.25468633, 8.598134e-08, -0.25468633, -0.96702373, 0.52444035, 0.66689175, 5.449288)
 
 [node name="Rail8" parent="Level" unique_id=771398954 instance=ExtResource("5_6v1d1")]
-transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, 0.5900496, -0.06255674, 1.157808)
+transform = Transform3D(-1, 0, -1.2698283e-07, 0, 1, 0, 8.742278e-08, 0, -1.452514, 0.52504694, -0.06255674, 1.157808)
 
 [node name="Belt2" type="Node3D" parent="Level" unique_id=516513564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8278995, 0.15300322, 0.55775154)
@@ -434,54 +494,64 @@ mesh = SubResource("CylinderMesh_354uh")
 transform = Transform3D(-4.3711385e-08, 1.5529405e-22, 1, 0, 1, 8.351872e-23, -1, 3.5527137e-15, -4.371139e-08, 0.005471617, -1.0117838, 0.0018436909)
 mesh = SubResource("CylinderMesh_354uh")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1168886877]
+[node name="Lights" type="Node3D" parent="." unique_id=1459885023]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.0384388, -0.3248335)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=1168886877]
 light_energy = 3.87
 shadow_enabled = true
 spot_angle = 43.199375
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=162769386]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2343323, 2.0384388, -0.3248335)
-light_energy = 3.87
-spot_angle = 43.199375
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=1495058247]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.0214162, 2.0384388, -0.3248335)
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=162769386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2343323, 0, 0)
 light_energy = 3.87
 shadow_enabled = true
 spot_angle = 43.199375
 
-[node name="SpotLight3D7" type="SpotLight3D" parent="." unique_id=760740065]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.868517, 2.0384388, -0.3248335)
-light_energy = 3.87
-spot_angle = 43.199375
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=2100759000]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.0214162, 2.0384388, 1.037315)
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights" unique_id=1495058247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0214162, 0, 0)
 light_energy = 3.87
 shadow_enabled = true
 spot_angle = 43.199375
 
-[node name="SpotLight3D8" type="SpotLight3D" parent="." unique_id=2012045406]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.5141189, 2.6111915, -0.15637624)
+[node name="SpotLight3D10" type="SpotLight3D" parent="Lights" unique_id=2081487158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1053257, -3.0772467, -2.3841858e-07)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D11" type="SpotLight3D" parent="Lights" unique_id=810183660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9814252, -3.0772467, -2.3841858e-07)
 light_energy = 3.87
 spot_angle = 43.199375
 
-[node name="SpotLight3D9" type="SpotLight3D" parent="." unique_id=1846873439]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.7952714, 2.6111915, -0.15637624)
+[node name="SpotLight3D12" type="SpotLight3D" parent="Lights" unique_id=1996454123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.426324, -3.0772467, -2.3841858e-07)
 light_energy = 3.87
 spot_angle = 43.199375
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="." unique_id=968302238]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.086988926, 1.8132858, 1.0712017)
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights" unique_id=2100759000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0214162, -1.3621485, 0)
+light_energy = 3.87
+shadow_enabled = true
+spot_angle = 43.199375
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights" unique_id=968302238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.086988926, -1.1389434, 0.15192246)
 light_energy = 3.03
 shadow_enabled = true
 spot_angle = 43.199375
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="." unique_id=1085345927]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.1252446, 2.0384388, 1.037315)
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights" unique_id=1085345927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1252446, -1.3621485, 0)
 light_energy = 3.87
 shadow_enabled = true
 spot_angle = 43.199375
 
+[node name="SideFade" type="MeshInstance3D" parent="." unique_id=2000391993]
+transform = Transform3D(19.32846, 0, 0, 0, 2.7716842, 0.47770947, 0, -9.187213, 0.14411983, 0, 2.63, 1.426)
+mesh = SubResource("QuadMesh_5qu1p")
+surface_material_override/0 = SubResource("StandardMaterial3D_58ql1")
+
 [connection signal="body_entered" from="Trash" to="." method="_on_trash_body_entered"]
+[connection signal="pressed" from="Control/TextureButton" to="." method="NextBox"]

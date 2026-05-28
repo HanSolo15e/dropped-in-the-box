@@ -120,7 +120,7 @@ func timerout():
 
 
 func _process(_delta: float) -> void:
-	
+
 	
 	
 	
@@ -150,22 +150,23 @@ func _process(_delta: float) -> void:
 		box_lable.text = str(RoundBoxes - BoxesCompleted)
 		
 		
-		if Input.is_action_just_pressed("Next_Box"):
-			if not boxdebounce:
-				boxdebounce = true
-				ScoreItems()
-				BoxStateChange.emit(Shipping_Box.BoxState.END)
-				
-				
-				if CurBox:
-					BoxesCompleted += 1
-					await CurBox.TaskDone
-					print("Box has finished moving to the end.")
-					killboxitems()
-					ReplenishItems.emit(BaseItemNum - ItemsOnConveyer.size())
-					SpawnBox()
+func NextBox():
+	if Gameint:
+				if not boxdebounce:
+					boxdebounce = true
+					ScoreItems()
+					BoxStateChange.emit(Shipping_Box.BoxState.END)
 					
-				boxdebounce = false
+					
+					if CurBox:
+						BoxesCompleted += 1
+						await CurBox.TaskDone
+						print("Box has finished moving to the end.")
+						killboxitems()
+						ReplenishItems.emit(BaseItemNum - ItemsOnConveyer.size())
+						SpawnBox()
+						
+					boxdebounce = false
 
 func GameOver(timed_out: bool):
 	Gameint = false 

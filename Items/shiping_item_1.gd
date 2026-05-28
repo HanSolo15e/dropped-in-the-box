@@ -3,7 +3,7 @@ class_name Shipping_Item
 
 @export var Size = 10
 @export var model: String # Assuming this gets the path like "res://..."
-
+@onready var main_game: Node3D = $"."
 @onready var area_3d: Area3D = $Area3D
 @onready var rigid_body_3d: RigidBody3D = self
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
@@ -60,8 +60,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		rigid_body_3d.gravity_scale = 1
 		
+#idk why but this func is never used but i like it so it stays
 func get_mouse_world_position() -> Vector3:
-	var mouse_pos = get_viewport().get_mouse_position()
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var camera = get_viewport().get_camera_3d()
 	
 	
@@ -86,22 +87,28 @@ func _clicked(camera: Node, event: InputEvent, event_position: Vector3, normal: 
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				if IsPickedUp:
-					print("Drop")
-					IsPickedUp = false
-				elif not IsPickedUp: 
+				if not IsPickedUp && GameLoader.GetHoldingState() == false: 
 					print("pick")
 					IsPickedUp = true
+					GameLoader.HoldingItem(true)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				pass
+# 1. Change this to _unhandled_input
+func _unhandled_input(event: InputEvent) -> void:
+	if IsPickedUp:
+		if event is InputEventMouseButton and event.pressed:
+			match event.button_index:
+				MOUSE_BUTTON_LEFT:
+					print("Drop")
+					IsPickedUp = false
+					GameLoader.HoldingItem(false)
+					
+					# 2. ADD THIS MAGIC LINE
+					get_viewport().set_input_as_handled()
 					
 func get_clamped_mouse_pos(distance: float) -> Vector3:
 	var camera = get_viewport().get_camera_3d()
 	var mouse_pos = get_viewport().get_mouse_position()
+	mouse_pos += Vector2(-50,0)
 	
 	var ray_start = camera.project_ray_origin(mouse_pos)
 	var ray_dir = camera.project_ray_normal(mouse_pos)

@@ -15,6 +15,7 @@ config/version="1.2"
 run/main_scene="uid://bni3l28ymp62s"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dlxc3hl65glln"
+boot_splash/minimum_display_time=1500
 
 [autoload]
 
@@ -78,4 +79,5 @@ jolt_physics_3d/simulation/position_steps=4
 rendering_device/driver.windows="d3d12"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=2
+scaling_3d/mode=1
 scaling_3d/scale=0.5
