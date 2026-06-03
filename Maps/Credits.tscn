@@ -31,13 +31,17 @@ texture = ExtResource("1_7e127")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=649502238]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1885490806]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 101
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=649502238]
+layout_mode = 2
 focus_mode = 0
 focus_behavior_recursive = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -45,9 +49,29 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_ey7ie")
 theme_override_font_sizes/normal_font_size = 44
-text = "Programing and Designe by HanSolo15e.
+text = "Programing and Design by HanSolo15e.
 Music and Video by Kemunian.
-Some 3D Assets from Pollyhaven, others are custom."
+Some 3D Assets from Pollyhaven, others are custom.
+
+LEGAL NOTICE:
+Dropped In The Box — Credits & Licenses
+
+Developed by: Evan P (HanSolo15e)
+This game is distributed under the PolyForm Noncommercial 1.0.0 License.
+Source code available at: https://github.com/HanSolo15e/dropped-in-the-box
+
+------------------------------------------------------------------------
+THIRD-PARTY NOTICES
+
+1. Godot Engine
+This game uses the Godot Engine, available under the following terms:
+Copyright (c) 2014-present Godot Engine contributors.
+Licensed under the MIT License (godotengine.org/license)
+
+2. Assets
+Placeholder 3D models and textures are sourced from PolyHaven 
+under the CC0 (Public Domain) license.
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
