@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://hhi2rwpe13rl" path="res://Scripts/progress_bar.gd" id="4_slpp8"]
 [ext_resource type="Texture2D" uid="uid://ckn8lmulipirr" path="res://UI/cardboardButton Background Removed.png" id="5_5l80t"]
 [ext_resource type="PackedScene" uid="uid://1ao6em1jj58j" path="res://Models/Other/Rail.glb" id="5_6v1d1"]
+[ext_resource type="Script" uid="uid://bvt1n7qwahc1s" path="res://Maps/gamepad_cursor.gd" id="5_58ql1"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_354uh"]
 [ext_resource type="PackedScene" uid="uid://5m31hl3f2bve" path="res://Models/Other/Shoot.glb" id="9_354uh"]
 [ext_resource type="Texture2D" uid="uid://cutlwbbat138n" path="res://UI/RedButtonUp.png" id="11_gqg7b"]
@@ -38,12 +39,12 @@ size = Vector3(3.0131226, 0.5810547, 1.125)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xdrmq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l80t"]
-bg_color = Color(0.99999994, 0.14328519, 0.1680153, 0)
-border_width_left = 50
-border_width_top = 50
-border_width_right = 50
+bg_color = Color(1, 0.3947139, 0.35409263, 0)
+border_width_left = 80
+border_width_top = 80
+border_width_right = 80
 border_width_bottom = 100
-border_color = Color(1, 1, 1, 0.42745098)
+border_color = Color(1, 0, 0, 0.42745098)
 border_blend = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_xdrmq"]
@@ -60,6 +61,24 @@ action = &"Next_Box"
 
 [sub_resource type="Shortcut" id="Shortcut_gqg7b"]
 events = [SubResource("InputEventAction_gqg7b")]
+
+[sub_resource type="Curve" id="Curve_58ql1"]
+_data = [Vector2(0, 0), 0.0, 0.032857202, 0, 0, Vector2(0.4218566, 0.41434503), 0.6245521, 0.6245521, 0, 0, Vector2(0.7003525, 0.48626757), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.17902693, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_63n1s"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.67435896, 1)
+colors = PackedColorArray(0.09048235, 0.09048236, 0.0904823, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_58ql1"]
+gradient = SubResource("Gradient_63n1s")
+width = 100
+height = 100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5064103, 0.34188035)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xdrmq"]
 friction = 0.05
@@ -169,7 +188,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="Warning" type="Panel" parent="Control" unique_id=2075733242]
 visible = false
@@ -371,11 +390,45 @@ offset_bottom = 327.0
 grow_vertical = 0
 scale = Vector2(0.26, 0.26)
 tooltip_text = "Next Box"
+mouse_filter = 1
+keep_pressed_outside = true
 shortcut = SubResource("Shortcut_gqg7b")
-shortcut_feedback = false
 shortcut_in_tooltip = false
 texture_normal = ExtResource("11_gqg7b")
 texture_pressed = ExtResource("12_5qu1p")
+
+[node name="Cursor" type="Control" parent="." unique_id=1158474629]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_58ql1")
+StickResponseCurve = SubResource("Curve_58ql1")
+
+[node name="TextureRect" type="TextureRect" parent="Cursor" unique_id=436779357]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 955.0
+offset_bottom = 955.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+texture = SubResource("GradientTexture2D_58ql1")
 
 [node name="Level" type="Node3D" parent="." unique_id=1699124334]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.5903614, 0.3292787, -0.33030528)

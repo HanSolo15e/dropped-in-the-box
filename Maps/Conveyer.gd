@@ -2,10 +2,12 @@ extends Area3D
 var TotalItems: Array = []
 @onready var main_game: Node3D = $".."
 @onready var item_spawn_point: Node3D = $"../ItemSpawnPoint"
+@onready var cursor: Control = $"../Cursor"
 const ShipingItem1 = preload("res://Items/shiping_item1.tscn")
 var main_game_script: Script 
 var BaseItemNum: int = 5
 var AllProps: Array[String] 
+
 
 signal AddBoxToArray(ObjRef)
 
@@ -82,6 +84,7 @@ func SpawnItem():
 	var itemtopick = AllProps.pick_random()
 	ItemToSpawn.rotation.y = deg_to_rad(randf_range(0, 360))
 	ItemToSpawn.model = itemtopick
+	ItemToSpawn.cursor = cursor
 	ItemToSpawn.Size = LookUpSize(itemtopick.get_file())
 	item_spawn_point.add_child(ItemToSpawn)
 	AddBoxToArray.emit(ItemToSpawn)

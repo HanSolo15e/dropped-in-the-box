@@ -17,6 +17,35 @@ var boxescomplete: int = 0
 
 var IsHoldingItem: bool = false
 
+var is_gamepad: bool = false
+
+func _input(event):
+	
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		if event is InputEventJoypadMotion and abs(event.axis_value) < 0.3:
+			return
+		is_gamepad = true
+		
+	# Check if the incoming event belongs to a keyboard or mouse
+	elif event is InputEventKey or event is not InputEventMouseButton:
+		is_gamepad = false
+	
+		
+	if event.is_action_pressed("DebugDraw"):
+		var viewport = get_viewport()
+		
+		# Cycle through different built-in render pass views
+		if viewport.debug_draw == Viewport.DEBUG_DRAW_DISABLED:
+			viewport.debug_draw = Viewport.DEBUG_DRAW_WIREFRAME
+		elif viewport.debug_draw == Viewport.DEBUG_DRAW_WIREFRAME:
+			viewport.debug_draw = Viewport.DEBUG_DRAW_UNSHADED
+		elif viewport.debug_draw == Viewport.DEBUG_DRAW_UNSHADED:
+			viewport.debug_draw = Viewport.DEBUG_DRAW_NORMAL_BUFFER
+		elif viewport.debug_draw == Viewport.DEBUG_DRAW_NORMAL_BUFFER:
+			viewport.debug_draw = Viewport.DEBUG_DRAW_LIGHTING
+		else:
+			viewport.debug_draw = Viewport.DEBUG_DRAW_DISABLED
+			
 func GetHoldingState():
 	return IsHoldingItem
 	

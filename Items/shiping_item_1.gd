@@ -1,6 +1,7 @@
 extends RigidBody3D
 class_name Shipping_Item
 
+var cursor: Control
 @export var Size = 10
 @export var model: String # Assuming this gets the path like "res://..."
 @onready var main_game: Node3D = $"."
@@ -14,6 +15,10 @@ var IsPickedUp: bool = false
 var PullForce: Vector3 = Vector3(0,0,0)
 var HitPos: Vector3 = Vector3(0,0,0)
 var IsHover: bool = false
+
+var RotateSpeed: float = 0.0002
+
+var resetDebounce: bool = true
 
 func _ready() -> void:
 	area_3d.input_event.connect(_clicked)
@@ -38,8 +43,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if IsPickedUp:
-		var state = PhysicsServer3D.body_get_direct_state(rigid_body_3d.get_rid())
-		var point_velocity = state.get_velocity_at_local_position(HitPos)
+		angular_damp = 12
+		center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
+		center_of_mass = Vector3(0,0,0)
+		
+
 		var mouse_pos = get_clamped_mouse_pos(2.6)
 		var to_target = mouse_pos - rigid_body_3d.global_position
 		var force_required = (((to_target * rigid_body_3d.mass)/1) / delta*2)
@@ -48,17 +56,22 @@ func _physics_process(delta: float) -> void:
 		rigid_body_3d.gravity_scale = 0
 		rigid_body_3d.apply_force((force_required - counter_velocity))
 		
-		if Input.is_action_just_pressed("Gamplay_Left"):
-			rigid_body_3d.apply_torque_impulse(Vector3(0,-0.05,0))
-		elif Input.is_action_just_pressed("Gamplay_Right"):
-			rigid_body_3d.apply_torque_impulse(Vector3(0,0.05,0))
-		elif Input.is_action_just_pressed("Gamplay_Down"):
-			rigid_body_3d.apply_torque_impulse(Vector3(0.05,0,0))
-		elif Input.is_action_just_pressed("Gamplay_Up"):
-			rigid_body_3d.apply_torque_impulse(Vector3(-0.05,0,0))
+		# 0.5
+		var InputVector: Vector2 = Input.get_vector("Gamplay_Left","Gamplay_Right","Gamplay_Up","Gamplay_Down")
+		#if Input.is_action_just_pressed("Gamplay_Left") or Input.is_action_just_pressed("Gamplay_Right") or Input.is_action_just_pressed("Gamplay_Up") or Input.is_action_just_pressed("Gamplay_Down"):
+		#	pass
+		rigid_body_3d.apply_torque_impulse(Vector3((InputVector.y * RotateSpeed)/delta,(InputVector.x * RotateSpeed)/delta,0.0))
+		resetDebounce = true
 	
 	else:
-		rigid_body_3d.gravity_scale = 1
+		#Prob should change this, EDIT: i did!
+		if resetDebounce &&! IsPickedUp:
+			print("rest item settings")
+			inertia = Vector3(0,0,0)
+			angular_damp = 10
+			center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_AUTO
+			rigid_body_3d.gravity_scale = 1
+			resetDebounce = false
 		
 #idk why but this func is never used but i like it so it stays
 func get_mouse_world_position() -> Vector3:
@@ -108,7 +121,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func get_clamped_mouse_pos(distance: float) -> Vector3:
 	var camera = get_viewport().get_camera_3d()
 	var mouse_pos = get_viewport().get_mouse_position()
-	mouse_pos += Vector2(-50,0)
+	if GameLoader.is_gamepad:
+		mouse_pos = cursor.position
+	#mouse_pos += Vector2(-50,0)
 	
 	var ray_start = camera.project_ray_origin(mouse_pos)
 	var ray_dir = camera.project_ray_normal(mouse_pos)

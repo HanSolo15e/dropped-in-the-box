@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dwm6lhw7uny5x" path="res://UI/Cardbored2.jpg" id="1_gafc6"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="2_sml2m"]
 [ext_resource type="Texture2D" uid="uid://erv07ect5trr" path="res://UI/ButtonCardboardTransparent.png" id="3_kce66"]
+[ext_resource type="Texture2D" uid="uid://dpuoisjt04m3y" path="res://UI/new_gradient_texture_2d.tres" id="4_p2c84"]
 [ext_resource type="Script" uid="uid://ctd7u0s1ndl5j" path="res://Maps/card_bord_button.gd" id="4_tl3hd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p2c84"]
@@ -36,6 +37,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
+focus_behavior_recursive = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
@@ -63,8 +66,10 @@ offset_right = 558.0
 offset_bottom = 357.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_kce66")
+texture_focused = ExtResource("4_p2c84")
 script = ExtResource("4_tl3hd")
 levelstring = "res://Maps/MainMenue.tscn"
+focus = true
 
 [node name="Label" type="Label" parent="CardBordButton3" unique_id=876786485]
 layout_mode = 1

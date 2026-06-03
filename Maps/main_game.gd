@@ -94,6 +94,7 @@ func SetShift(day: int):
 			
 func Init_Game():
 	
+	GameLoader.HoldingItem(false)
 	game_timer.timeout.connect(timerout)
 	ShiftNumber = GameLoader.NextShiftNumber
 	SetShift(ShiftNumber)
@@ -207,7 +208,7 @@ func ScoreItems():
 			
 	
 	if BoxFailed == false:
-		Score += 100*(VolumeOfItems / CurBox.BoxSize)
+		Score += int(100*(VolumeOfItems / CurBox.BoxSize))
 		BoxScored.emit(false, 100*(VolumeOfItems / CurBox.BoxSize))
 	else:
 		BoxScored.emit(true, 0)
