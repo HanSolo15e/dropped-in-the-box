@@ -1,0 +1,52 @@
+PolyForm Noncommercial License 1.0.0
+
+Author: [Evan P (HanSolo15e)]
+Project: [Dropped In The Box]
+Year: [2026]
+
+------------------------------------------------------------------------
+
+Acceptance
+By using the software, you agree to these terms and conditions.
+
+License
+The author grants you a license to use, copy, modify, publicize, and 
+distribute the software for noncommercial purposes.
+
+Noncommercial Purpose
+A purpose is noncommercial if it is not directed toward commercial 
+advantage or monetary compensation.
+
+Notices
+You must ensure that any copy of the software you distribute includes 
+the text of this license and the notice above.
+
+No Other Rights
+The author reserves all rights not expressly granted. No trade names, 
+trademarks, or service marks are licensed.
+
+Defense of Claims
+If anyone brings a claim against the author because of something you 
+did with the software, you must pay the author's legal fees and costs 
+to defend that claim, as well as any damages awarded or settlements 
+agreed to.
+
+Disclaimer of Warranties
+The software is provided as is, without any warranties of any kind. 
+The author disclaims all warranties, express or implied, including 
+warranties of merchantability, fitness for a particular purpose, 
+and noninfringement.
+
+Limitation of Liability
+The author will not be liable for any damages related to the software 
+or this license, under any legal theory, for any amount.
+
+------------------------------------------------------------------------
+THIRD-PARTY ASSET NOTICES
+
+This project contains placeholder 3D models and textures sourced from 
+PolyHaven. These specific assets are distributed under the CC0 (Creative 
+Commons Zero - Public Domain) license and are exempt from the 
+Noncommercial restrictions of the PolyForm license above. 
+
+You can find the original, unrestricted assets at polyhaven.com.
