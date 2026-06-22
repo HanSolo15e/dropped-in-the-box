@@ -6,7 +6,8 @@ var TotalItems: Array = []
 const ShipingItem1 = preload("res://Items/shiping_item1.tscn")
 var main_game_script: Script 
 var BaseItemNum: int = 5
-var AllProps: Array[String] 
+var AllProps: Array[String] = []
+var spawn_bag: Array[String] = [] 
 
 
 signal AddBoxToArray(ObjRef)
@@ -14,7 +15,7 @@ signal AddBoxToArray(ObjRef)
 signal TaskFinished
 
 func _ready() -> void:
-	AllProps = get_files_by_type("res://Models/Items/Models/", ".glb")
+	AllProps = get_files_by_type("res://Models/ItemModels/", ".glb")
 	print(AllProps)
 	main_game_script = main_game.get_script()
 	main_game.ReplenishItems.connect(ReplenishItems)
@@ -41,11 +42,13 @@ func LookUpSize(FileName):
 		"leather_cleaner_can.glb":
 			return 18
 		"Television_01.glb":
-			return 25
+			return 20
 		"small_lpg_tank.glb":
 			return 25
 		"Ukulele_01.glb":
 			return 20
+		"DouhToy.glb":
+			return 10
 		_:
 			print("could not find item hmmm")
 			return 10
@@ -64,7 +67,7 @@ func get_files_by_type(folder_path: String, file_extension: String) -> Array[Str
 			
 			
 			if clean_file.ends_with(file_extension):
-				var full_path = folder_path + "/" + clean_file
+				var full_path = folder_path.path_join(clean_file)
 				
 				if not matched_files.has(full_path): 
 					matched_files.append(full_path)
@@ -81,7 +84,13 @@ func SpawnItem():
 	if not ItemToSpawn.is_in_group("ShippingItems"):
 		ItemToSpawn.add_to_group("ShippingItems")
 	
-	var itemtopick = AllProps.pick_random()
+	#var itemtopick = AllProps.pick_random()
+	if spawn_bag.is_empty():
+		spawn_bag = AllProps.duplicate()
+		spawn_bag.shuffle()
+	
+	var itemtopick = spawn_bag.pop_back()
+	
 	ItemToSpawn.rotation.y = deg_to_rad(randf_range(0, 360))
 	ItemToSpawn.model = itemtopick
 	ItemToSpawn.cursor = cursor

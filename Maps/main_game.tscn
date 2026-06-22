@@ -11,8 +11,17 @@
 [ext_resource type="Script" uid="uid://bvt1n7qwahc1s" path="res://Maps/gamepad_cursor.gd" id="5_58ql1"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_354uh"]
 [ext_resource type="PackedScene" uid="uid://5m31hl3f2bve" path="res://Models/Other/Shoot.glb" id="9_354uh"]
+[ext_resource type="Texture2D" uid="uid://dughgyrmi3sdu" path="res://UI/XTex.png" id="10_58ql1"]
 [ext_resource type="Texture2D" uid="uid://cutlwbbat138n" path="res://UI/RedButtonUp.png" id="11_gqg7b"]
 [ext_resource type="Texture2D" uid="uid://brk18q5tuvcr" path="res://UI/RedButtonDown.png" id="12_5qu1p"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_58ql1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vli4r"]
+transparency = 1
+depth_draw_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("10_58ql1")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_354uh"]
 
@@ -61,6 +70,33 @@ action = &"Next_Box"
 
 [sub_resource type="Shortcut" id="Shortcut_gqg7b"]
 events = [SubResource("InputEventAction_gqg7b")]
+
+[sub_resource type="Animation" id="Animation_58ql1"]
+resource_name = "BoxFail"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../FailXlogo")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 2.2532384, 7.013342, 0.56666666, 1, 0, 3.8714902, 1.8350264, 0.9, 1, 0, 1.1351372, 1.1199243, 1.2, 1, 0, 0.9775556, 1.3146154, 1.4333333, 1, 0, 0.3069145, 3.6157792)
+
+[sub_resource type="Animation" id="Animation_vli4r"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../FailXlogo")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 2.2532384, 7.013342)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2yf4v"]
+_data = {
+&"BoxFail": SubResource("Animation_58ql1"),
+&"RESET": SubResource("Animation_vli4r")
+}
 
 [sub_resource type="Curve" id="Curve_58ql1"]
 _data = [Vector2(0, 0), 0.0, 0.032857202, 0, 0, Vector2(0.4218566, 0.41434503), 0.6245521, 0.6245521, 0, 0, Vector2(0.7003525, 0.48626757), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.17902693, 0.0, 0, 0]
@@ -120,8 +156,13 @@ RoundBoxes = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=285724018]
 stream = ExtResource("2_xbsuh")
-volume_db = -10.965
+volume_db = -23.583
 autoplay = true
+
+[node name="FailXlogo" type="MeshInstance3D" parent="." unique_id=2137412171]
+transform = Transform3D(1, 0, 0, 0, 0.2797955, 0.96005964, 0, -0.96005964, 0.2797955, 0, 2.2532384, 7.013342)
+mesh = SubResource("QuadMesh_58ql1")
+surface_material_override/0 = SubResource("StandardMaterial3D_vli4r")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=923763964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9675281, 0)
@@ -396,6 +437,9 @@ shortcut = SubResource("Shortcut_gqg7b")
 shortcut_in_tooltip = false
 texture_normal = ExtResource("11_gqg7b")
 texture_pressed = ExtResource("12_5qu1p")
+
+[node name="BoxFailAnim" type="AnimationPlayer" parent="Control" unique_id=837693169]
+libraries/ = SubResource("AnimationLibrary_2yf4v")
 
 [node name="Cursor" type="Control" parent="." unique_id=1158474629]
 layout_mode = 3

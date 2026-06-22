@@ -3,6 +3,7 @@ extends Node3D
 #this code made me not want to kill myself... i made me see life as amzing and fuffiling 
 #i got guns in my head
 
+@onready var box_fail_anim: AnimationPlayer = $Control/BoxFailAnim
 
 @onready var conveyer_area: Area3D = $ConveyerArea
 @onready var box_play_pos: Node3D = $BoxPlayPos
@@ -156,11 +157,14 @@ func NextBox():
 				if not boxdebounce:
 					boxdebounce = true
 					ScoreItems()
+					if BoxFailed:
+						await get_tree().create_timer(1.0).timeout	
 					BoxStateChange.emit(Shipping_Box.BoxState.END)
 					
 					
 					if CurBox:
 						BoxesCompleted += 1
+						
 						await CurBox.TaskDone
 						print("Box has finished moving to the end.")
 						killboxitems()
@@ -168,6 +172,7 @@ func NextBox():
 						SpawnBox()
 						
 					boxdebounce = false
+
 
 func GameOver(timed_out: bool):
 	Gameint = false 
@@ -211,10 +216,11 @@ func ScoreItems():
 		Score += int(100*(VolumeOfItems / CurBox.BoxSize))
 		BoxScored.emit(false, 100*(VolumeOfItems / CurBox.BoxSize))
 	else:
+		box_fail_anim.play("BoxFail")
 		BoxScored.emit(true, 0)
-		
 	print(VolumeOfItems)
-	
+
+
 
 func killboxitems():
 	for i in BoxArea.get_overlapping_bodies():

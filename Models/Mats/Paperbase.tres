@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bgof2mnr6t7u2"]
+
+[ext_resource type="Texture2D" uid="uid://da8juvrmvt2bi" path="res://Models/ItemModels/DouhToy_RealDoughnutBothSides.png" id="1_rrtvg"]
+
+[resource]
+resource_name = "Paperbase"
+cull_mode = 2
+albedo_texture = ExtResource("1_rrtvg")
+roughness = 0.5
+texture_filter = 2

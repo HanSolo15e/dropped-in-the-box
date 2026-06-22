@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8q54uus21add"
-path="res://.godot/imported/BoxLogoAsset.png-9527bf8325205133027ceb3dfd49becb.ctex"
+uid="uid://cep8ftiq7fkgv"
+path="res://.godot/imported/wwise_logo_rgb.png-dbb7b15dcbb05de4ce526fe4ca3ffc41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/BoxLogoAsset.png"
-dest_files=["res://.godot/imported/BoxLogoAsset.png-9527bf8325205133027ceb3dfd49becb.ctex"]
+source_file="res://UI/wwise_logo_rgb.png"
+dest_files=["res://.godot/imported/wwise_logo_rgb.png-dbb7b15dcbb05de4ce526fe4ca3ffc41.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8q54uus21add"
-path="res://.godot/imported/BoxLogoAsset.png-9527bf8325205133027ceb3dfd49becb.ctex"
+uid="uid://4cuviafkhwvv"
+path="res://.godot/imported/Icon-iOS-Default-1024x1024@1x.png-9195856fdbe09a6575e44b10debe44ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/BoxLogoAsset.png"
-dest_files=["res://.godot/imported/BoxLogoAsset.png-9527bf8325205133027ceb3dfd49becb.ctex"]
+source_file="res://UI/Icon-iOS-Default-1024x1024@1x.png"
+dest_files=["res://.godot/imported/Icon-iOS-Default-1024x1024@1x.png-9195856fdbe09a6575e44b10debe44ad.ctex"]
 
 [params]
 
