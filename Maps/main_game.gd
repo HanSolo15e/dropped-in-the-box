@@ -1,7 +1,6 @@
 extends Node3D
 
-#this code made me not want to kill myself... i made me see life as amzing and fuffiling 
-#i got guns in my head
+#i love life this code made me love it
 
 @onready var box_fail_anim: AnimationPlayer = $Control/BoxFailAnim
 
@@ -59,38 +58,21 @@ func _ready() -> void:
 func addtoarray(Item):
 	ItemsOnConveyer.append(Item)
 	
+	
+func SetShiftData(base: int, length: int, round_boxes: int, win_pct: int): 
+	BaseItemNum = base
+	shiftlength = length
+	RoundBoxes = round_boxes
+	PercentToWin = win_pct
+	
 func SetShift(day: int):
 	match day:
-		0:
-			BaseItemNum = 10
-			shiftlength = 60
-			RoundBoxes = 5
-			PercentToWin = 50
-		1:
-			BaseItemNum = 10
-			shiftlength = 70
-			RoundBoxes = 5
-			PercentToWin = 70
-		2:
-			BaseItemNum = 10
-			shiftlength = 100
-			RoundBoxes = 5
-			PercentToWin = 70
-		3:
-			BaseItemNum = 10
-			shiftlength = 60
-			RoundBoxes = 10
-			PercentToWin = 25
-		4:
-			BaseItemNum = 10
-			shiftlength = 60
-			RoundBoxes = 6
-			PercentToWin = 60
-		5:
-			BaseItemNum = 10
-			shiftlength = 160
-			RoundBoxes = 14
-			PercentToWin = 50
+		0:SetShiftData(10,60,5,50)
+		1:SetShiftData(10,70,5,70)
+		2:SetShiftData(10,100,5,70)
+		3:SetShiftData(10,60,10,25)
+		4:SetShiftData(10,60,6,60)
+		5:SetShiftData(10,160,18,50)
 			
 			
 func Init_Game():
@@ -103,6 +85,7 @@ func Init_Game():
 	box_fill_value.text = str(PercentToWin) + "%"
 	boxes_completed_value.text = str(RoundBoxes)
 	game_timer.wait_time = shiftlength
+	
 	
 	box_lable.text = str(RoundBoxes - BoxesCompleted)
 	score_lable.text = "0%"
@@ -122,18 +105,12 @@ func timerout():
 
 
 func _process(_delta: float) -> void:
-
-	
-	
 	
 	if Gameint and BoxesCompleted >= RoundBoxes:
 			GameOver(false)
 
 	if Gameint:
-		
-		 
 		var itemoutside: bool = false
-		
 		for i in BoxFailArea.get_overlapping_bodies():
 			if i is Shipping_Item:
 				itemoutside = true
@@ -143,14 +120,9 @@ func _process(_delta: float) -> void:
 			warning.show()
 		else: 
 			warning.hide()
-		
-		if BoxesCompleted <= 0:
-			score_lable.text = "0%"
-		else:
-			score_lable.text = str(Score / BoxesCompleted) + "%"
-			
-		box_lable.text = str(RoundBoxes - BoxesCompleted)
-		
+
+func UpdateUI():
+	pass
 		
 func NextBox():
 	if Gameint:
@@ -171,6 +143,12 @@ func NextBox():
 						ReplenishItems.emit(BaseItemNum - ItemsOnConveyer.size())
 						SpawnBox()
 						
+						if BoxesCompleted <= 0:
+							score_lable.text = "0%"
+						else:
+							score_lable.text = str(Score / BoxesCompleted) + "%"
+			
+							box_lable.text = str(RoundBoxes - BoxesCompleted)
 					boxdebounce = false
 
 
