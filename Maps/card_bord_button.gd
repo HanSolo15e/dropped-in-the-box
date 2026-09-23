@@ -3,6 +3,7 @@ class_name cardbordbuttonload
 
 @export var levelstring: String
 @export var focus: bool
+@export var GameLoaderPrams: Dictionary
 
 var had_focus: bool = false
 
@@ -26,4 +27,7 @@ func _process(delta: float) -> void:
 
 
 func _on_pressed() -> void:
+	for key in GameLoaderPrams:
+		GameLoader.set(key, GameLoaderPrams[key])
+	
 	GameLoader.load_level(levelstring,"res://Maps/Loading.tscn")

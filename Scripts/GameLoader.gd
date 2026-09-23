@@ -17,7 +17,11 @@ var boxescomplete: int = 0
 
 var IsHoldingItem: bool = false
 
+var DoTutorial: bool = false
+
 var is_gamepad: bool = false
+
+
 
 func _input(event):
 	
@@ -94,8 +98,16 @@ func _process(_delta: float) -> void:
 		
 func _ready():
 	# Detect platform capabilities rather than hardcoding OS checks
+	preloadBaseScenes()
+	
 	if DisplayServer.is_touchscreen_available():
 		is_mobile = true
 	else:
 		is_mobile = false
 	print(is_mobile)
+
+func preloadBaseScenes():
+	preload("res://Maps/Credits.tscn")
+	preload("res://Maps/controls.tscn")
+	preload("res://Maps/gselectscreen.tscn")
+	preload("res://Maps/MainMenue.tscn")

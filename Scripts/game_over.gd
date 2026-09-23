@@ -15,6 +15,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameLoader.DoTutorial = false
 	var tween = get_tree().create_tween()
 	
 	var tweenbase = stats_box.position

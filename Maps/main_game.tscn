@@ -9,11 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://ckn8lmulipirr" path="res://UI/cardboardButton Background Removed.png" id="5_5l80t"]
 [ext_resource type="PackedScene" uid="uid://1ao6em1jj58j" path="res://Models/Other/Rail.glb" id="5_6v1d1"]
 [ext_resource type="Script" uid="uid://bvt1n7qwahc1s" path="res://Maps/gamepad_cursor.gd" id="5_58ql1"]
+[ext_resource type="Script" uid="uid://c1bnhekvcsoac" path="res://Scripts/tutorial.gd" id="6_2yf4v"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_354uh"]
 [ext_resource type="PackedScene" uid="uid://5m31hl3f2bve" path="res://Models/Other/Shoot.glb" id="9_354uh"]
 [ext_resource type="Texture2D" uid="uid://dughgyrmi3sdu" path="res://UI/XTex.png" id="10_58ql1"]
 [ext_resource type="Texture2D" uid="uid://cutlwbbat138n" path="res://UI/RedButtonUp.png" id="11_gqg7b"]
 [ext_resource type="Texture2D" uid="uid://brk18q5tuvcr" path="res://UI/RedButtonDown.png" id="12_5qu1p"]
+[ext_resource type="Texture2D" uid="uid://dj2c4teiytybf" path="res://UI/TutorialSlides/Slide1.jpg" id="12_fy4ud"]
+[ext_resource type="FontFile" uid="uid://epn63kka4nlp" path="res://UI/somerset-barnyard-font/misc/Somerset Barnyard-5adc.woff" id="13_3s3o0"]
+[ext_resource type="LightmapGIData" uid="uid://b1ktb0k0mdivh" path="res://Maps/main_game.lmbake" id="15_vli4r"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_58ql1"]
 
@@ -41,10 +45,15 @@ tonemap_mode = 4
 tonemap_white = 16.0
 ssr_enabled = true
 ssao_enabled = true
+ssil_radius = 7.0
+ssil_intensity = 1.63
+ssil_normal_rejection = 0.64
+sdfgi_use_occlusion = true
 glow_strength = 0.77
 glow_bloom = 0.88
 glow_blend_mode = 2
 adjustment_enabled = true
+adjustment_saturation = 1.28
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6v1d1"]
 size = Vector3(3.0131226, 0.5810547, 1.125)
@@ -102,6 +111,25 @@ _data = {
 &"RESET": SubResource("Animation_vli4r")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_niu57"]
+bg_color = Color(0, 0, 0, 0.49803922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5emg1"]
+bg_color = Color(0.48465967, 0.70386195, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 7
+shadow_offset = Vector2(0.72, 2.79)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2l71"]
+bg_color = Color(0.4862745, 0.7019608, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
 [sub_resource type="Curve" id="Curve_58ql1"]
 _data = [Vector2(0, 0), 0.0, 0.032857202, 0, 0, Vector2(0.4218566, 0.41434503), 0.6245521, 0.6245521, 0, 0, Vector2(0.7003525, 0.48626757), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.17902693, 0.0, 0, 0]
 point_count = 4
@@ -130,10 +158,14 @@ size = Vector3(1, 0.59451294, 5.9001465)
 albedo_color = Color(0.22490484, 0.22490484, 0.22490484, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_354uh"]
+lightmap_size_hint = Vector2i(252, 252)
 material = SubResource("StandardMaterial3D_354uh")
+add_uv2 = true
 size = Vector2(50, 50)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_354uh"]
+lightmap_size_hint = Vector2i(8, 16)
+add_uv2 = true
 top_radius = 0.2
 bottom_radius = 0.2
 
@@ -189,14 +221,6 @@ one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=717211052]
 environment = SubResource("Environment_xdrmq")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=515908206]
-transform = Transform3D(-0.8783625, -0.47422287, 0.059936743, -0.022381607, 0.16605805, 0.98586214, -0.47747123, 0.8646025, -0.15647297, 0, 0, 0)
-visible = false
-shadow_enabled = true
-directional_shadow_split_1 = 0.026
-directional_shadow_split_2 = 0.245
-directional_shadow_blend_splits = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1981146416]
 transform = Transform3D(1, 0, 0, 0, 0.33988717, 0.9404663, 0, -0.9404663, 0.33988717, 0, 3.5255032, 1.609525)
@@ -254,6 +278,7 @@ offset_right = 465.00006
 offset_bottom = 278.0
 scale = Vector2(0.605, 0.78)
 texture = ExtResource("5_5l80t")
+metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLable" type="Label" parent="Control" unique_id=1745655783]
 layout_mode = 1
@@ -445,6 +470,88 @@ texture_pressed = ExtResource("12_5qu1p")
 [node name="BoxFailAnim" type="AnimationPlayer" parent="Control" unique_id=837693169]
 libraries/ = SubResource("AnimationLibrary_2yf4v")
 
+[node name="Tutorial" type="Control" parent="Control" unique_id=1793810727]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_2yf4v")
+
+[node name="Panel" type="Panel" parent="Control/Tutorial" unique_id=1343496295]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_niu57")
+
+[node name="StatsBox2" type="TextureRect" parent="Control/Tutorial" unique_id=2046839907]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -482.0
+offset_top = -256.5
+offset_right = 482.0
+offset_bottom = 256.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_5l80t")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Tutorial/StatsBox2" unique_id=1830089202]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -402.0
+offset_top = -158.0
+offset_right = -121.0
+offset_bottom = 123.0
+grow_horizontal = 0
+grow_vertical = 2
+offset_transform_position = Vector2(-7.68, 0)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("6_354uh")
+theme_override_font_sizes/normal_font_size = 29
+text = "This is your Quota! You must meet all requirements in order to move on to your next shift."
+
+[node name="Slide1" type="TextureRect" parent="Control/Tutorial/StatsBox2" unique_id=1445081630]
+layout_mode = 1
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 545.0
+offset_bottom = 338.07144
+texture = ExtResource("12_fy4ud")
+expand_mode = 5
+
+[node name="NextButton" type="Button" parent="Control/Tutorial/StatsBox2" unique_id=529349086]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -293.0
+offset_top = -139.5
+offset_right = -220.0
+offset_bottom = -105.5
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("13_3s3o0")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_5emg1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p2l71")
+text = "NEXT >"
+
 [node name="Cursor" type="Control" parent="." unique_id=1158474629]
 layout_mode = 3
 anchors_preset = 8
@@ -553,6 +660,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.05
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level" unique_id=874197318]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8479819, -1.663256, 1.2400904)
+gi_lightmap_texel_scale = 0.1
 mesh = SubResource("PlaneMesh_354uh")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Level" unique_id=1134105955]
@@ -638,7 +746,7 @@ shadow_enabled = true
 spot_angle = 43.199375
 
 [node name="SpotLight3D5" type="SpotLight3D" parent="Lights" unique_id=968302238]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.086988926, -1.1389434, 0.15192246)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.086988926, -1.3248563, 0.15192246)
 light_energy = 3.03
 shadow_enabled = true
 spot_angle = 43.199375
@@ -651,8 +759,18 @@ spot_angle = 43.199375
 
 [node name="SideFade" type="MeshInstance3D" parent="." unique_id=2000391993]
 transform = Transform3D(19.32846, 0, 0, 0, 2.7716842, 0.47770947, 0, -9.187213, 0.14411983, 0, 2.63, 1.426)
+gi_mode = 0
 mesh = SubResource("QuadMesh_5qu1p")
 surface_material_override/0 = SubResource("StandardMaterial3D_58ql1")
 
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=234194190]
+quality = 2
+bounces = 4
+texel_scale = 8.0
+generate_probes_subdiv = 3
+light_data = ExtResource("15_vli4r")
+
+[connection signal="RunTutorial" from="." to="Control/Tutorial" method="tutorial"]
 [connection signal="body_entered" from="Trash" to="." method="_on_trash_body_entered"]
 [connection signal="pressed" from="Control/TextureButton" to="." method="NextBox"]
+[connection signal="pressed" from="Control/Tutorial/StatsBox2/NextButton" to="Control/Tutorial" method="nextSlide"]

@@ -16,6 +16,7 @@ extends Node3D
 @onready var box_fill_value: Label = $Control/StatsBox/BoxFillValue
 @onready var boxes_completed_value: Label = $Control/StatsBox/BoxesCompletedValue
 @onready var shift_num_value: Label = $Control/StatsBox/ShiftNumValue
+@onready var tutorial: Control = $Control/Tutorial
 
 const ShipingItem1 = preload("res://Items/shiping_item1.tscn")
 const SHIPPING_BOX = preload("uid://cutejoujyxjam")
@@ -49,9 +50,12 @@ signal BoxStateChange(newstate: Shipping_Box.BoxState)
 
 signal BoxScored(Failed: bool, points: int)
 
+signal RunTutorial()
+
 
 func _ready() -> void:
 	conveyer_area.AddBoxToArray.connect(addtoarray)
+	print(GameLoader.DoTutorial)
 	Init_Game() 
 	
 # this is hear caus git hub stupid
@@ -93,6 +97,9 @@ func Init_Game():
 	ReplenishItems.emit(BaseItemNum)
 	SpawnBox()	
 	await conveyer_area.TaskFinished
+	if GameLoader.DoTutorial:
+		RunTutorial.emit()
+		await tutorial.TutorialDone
 	game_timer.start()
 	panel.hide()
 	

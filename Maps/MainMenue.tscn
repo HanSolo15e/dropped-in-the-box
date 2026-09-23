@@ -142,7 +142,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_g2u6n")
 texture_focused = ExtResource("4_g2u6n")
 script = ExtResource("4_18qut")
-levelstring = "res://Maps/main_game.tscn"
+levelstring = "res://Maps/gselectscreen.tscn"
 focus = true
 
 [node name="Label" type="Label" parent="CardBordButton" unique_id=1660829489]

@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://7sdc7awwsifq"]
+
+[ext_resource type="Texture2D" uid="uid://dwm6lhw7uny5x" path="res://UI/Cardbored2.jpg" id="1_m40ed"]
+[ext_resource type="FontFile" uid="uid://epn63kka4nlp" path="res://UI/somerset-barnyard-font/misc/Somerset Barnyard-5adc.woff" id="2_73mdj"]
+[ext_resource type="Texture2D" uid="uid://erv07ect5trr" path="res://UI/ButtonCardboardTransparent.png" id="3_8j50p"]
+[ext_resource type="Texture2D" uid="uid://dpuoisjt04m3y" path="res://UI/new_gradient_texture_2d.tres" id="4_2mys7"]
+[ext_resource type="Script" uid="uid://ctd7u0s1ndl5j" path="res://Maps/card_bord_button.gd" id="5_0kx40"]
+[ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="6_o7nuh"]
+[ext_resource type="AudioStream" uid="uid://b4k1wtsfdwlvd" path="res://Sound/firstwedropthenweboxmaster.ogg" id="7_c1inp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m40ed"]
+font_size = 102
+font_color = Color(0, 0, 0, 1)
+outline_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_23iee"]
+font_size = 102
+font_color = Color(0, 0, 0, 1)
+outline_size = 32
+
+[node name="Control" type="Control" unique_id=1969438470]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=69903090]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_m40ed")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1699702281]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -167.75
+offset_top = 44.0
+offset_right = 167.75
+offset_bottom = 212.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 19
+theme_override_fonts/normal_font = ExtResource("2_73mdj")
+theme_override_font_sizes/normal_font_size = 49
+bbcode_enabled = true
+text = "Select 
+Difficulty"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="." unique_id=385459868]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -3.0
+offset_right = 558.0
+offset_bottom = 357.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_8j50p")
+texture_focused = ExtResource("4_2mys7")
+script = ExtResource("5_0kx40")
+levelstring = "res://Maps/MainMenue.tscn"
+focus = true
+
+[node name="Label" type="Label" parent="BackButton" unique_id=305959713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.3333333
+offset_bottom = 3.3333435
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_o7nuh")
+theme_override_font_sizes/font_size = 102
+text = "Back"
+label_settings = SubResource("LabelSettings_m40ed")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton1" type="TextureButton" parent="." unique_id=1113670818]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -115.0
+offset_right = 457.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_8j50p")
+texture_focused = ExtResource("4_2mys7")
+script = ExtResource("5_0kx40")
+levelstring = "res://Maps/main_game.tscn"
+GameLoaderPrams = {
+"DoTutorial": true
+}
+
+[node name="Label" type="Label" parent="CardBordButton1" unique_id=1205654424]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_o7nuh")
+theme_override_font_sizes/font_size = 102
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton" type="TextureButton" parent="." unique_id=1820977270]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 7.0
+offset_right = 457.0
+offset_bottom = 367.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_8j50p")
+texture_focused = ExtResource("4_2mys7")
+script = ExtResource("5_0kx40")
+levelstring = "res://Maps/main_game.tscn"
+focus = true
+
+[node name="Label" type="Label" parent="CardBordButton" unique_id=1660829489]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_o7nuh")
+theme_override_font_sizes/font_size = 102
+text = "Normal"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardBordButton2" type="TextureButton" parent="." unique_id=931034840]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 140.0
+offset_right = 457.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_8j50p")
+texture_focused = ExtResource("4_2mys7")
+script = ExtResource("5_0kx40")
+levelstring = "res://Maps/main_game.tscn"
+GameLoaderPrams = {
+"DoTutorial": false
+}
+
+[node name="Label" type="Label" parent="CardBordButton2" unique_id=1972160749]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_o7nuh")
+theme_override_font_sizes/font_size = 102
+text = "Hard"
+label_settings = SubResource("LabelSettings_23iee")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1552856113]
+stream = ExtResource("7_c1inp")
+volume_db = -34.769
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton1" to="CardBordButton1" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton" to="CardBordButton" method="_on_pressed"]
+[connection signal="pressed" from="CardBordButton2" to="CardBordButton2" method="_on_pressed"]
