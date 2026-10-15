@@ -192,7 +192,7 @@ RoundBoxes = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=285724018]
 stream = ExtResource("2_xbsuh")
-volume_db = -23.583
+volume_db = -30.0
 autoplay = true
 
 [node name="FailXlogo" type="MeshInstance3D" parent="." unique_id=2137412171]

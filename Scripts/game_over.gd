@@ -18,6 +18,8 @@ func _ready() -> void:
 	GameLoader.DoTutorial = false
 	var tween = get_tree().create_tween()
 	
+	
+	
 	var tweenbase = stats_box.position
 	stats_box.position = stats_box.position - Vector2(0,700)
 	
@@ -46,6 +48,9 @@ func _ready() -> void:
 			rich_text_label.text = "[wave amp=50.0 freq=5.0]SHIFT COMPLETE[/wave]"
 			label.text = "NEXT SHIFT"
 			rich_text_label_2.text = "Your made it!"
+	
+	win_sound.stream_paused = GameLoader.MuteSound
+	lose_sound.stream_paused = GameLoader.MuteSound
 	
 	tween.tween_property(stats_box, "position", tweenbase,0.5).set_trans(Tween.TRANS_BOUNCE)
 	

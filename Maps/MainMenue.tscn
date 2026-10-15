@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dpuoisjt04m3y" path="res://UI/new_gradient_texture_2d.tres" id="4_g2u6n"]
 [ext_resource type="FontFile" uid="uid://ucrs28ulsux4" path="res://UI/somerset-barnyard-font/SomersetBarnyard-lXJZ.ttf" id="5_0mrxx"]
 [ext_resource type="AudioStream" uid="uid://b4k1wtsfdwlvd" path="res://Sound/firstwedropthenweboxmaster.ogg" id="6_l7ll2"]
+[ext_resource type="Texture2D" uid="uid://c102024ofs7us" path="res://UI/Vol_On.png" id="8_0mrxx"]
+[ext_resource type="Texture2D" uid="uid://bnd0owjsg8scw" path="res://UI/Vol_Off.png" id="9_23iee"]
+[ext_resource type="Script" uid="uid://c634nt7frlyla" path="res://Scripts/mute.gd" id="10_23iee"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_23iee"]
 font_size = 102
@@ -142,7 +145,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_g2u6n")
 texture_focused = ExtResource("4_g2u6n")
 script = ExtResource("4_18qut")
-levelstring = "res://Maps/gselectscreen.tscn"
+levelstring = "res://Maps/main_game.tscn"
 focus = true
 
 [node name="Label" type="Label" parent="CardBordButton" unique_id=1660829489]
@@ -167,6 +170,23 @@ stream = ExtResource("6_l7ll2")
 volume_db = -34.769
 autoplay = true
 
+[node name="Mute" type="TextureButton" parent="." unique_id=748302237]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -100.0
+offset_right = 1023.0
+offset_bottom = 900.0
+grow_vertical = 0
+scale = Vector2(0.08, 0.08)
+toggle_mode = true
+texture_normal = ExtResource("8_0mrxx")
+texture_pressed = ExtResource("9_23iee")
+script = ExtResource("10_23iee")
+
 [connection signal="pressed" from="CardBordButton2" to="CardBordButton2" method="_on_pressed"]
 [connection signal="pressed" from="CardBordButton3" to="CardBordButton3" method="_on_pressed"]
 [connection signal="pressed" from="CardBordButton" to="CardBordButton" method="_on_pressed"]
+[connection signal="pressed" from="Mute" to="Mute" method="_on_pressed"]

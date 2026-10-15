@@ -4,6 +4,7 @@ extends Node3D
 
 @onready var box_fail_anim: AnimationPlayer = $Control/BoxFailAnim
 
+@onready var music: AudioStreamPlayer = $Music
 @onready var conveyer_area: Area3D = $ConveyerArea
 @onready var box_play_pos: Node3D = $BoxPlayPos
 @onready var score_lable: Label = $Control/ScoreLable
@@ -81,15 +82,21 @@ func SetShift(day: int):
 			
 func Init_Game():
 	
+	# init values 
 	GameLoader.HoldingItem(false)
-	game_timer.timeout.connect(timerout)
 	ShiftNumber = GameLoader.NextShiftNumber
+	# set up shift data
 	SetShift(ShiftNumber)
+	game_timer.timeout.connect(timerout)
+	
+	# set up ui data (will move to seapret func or scirpt later)
 	shift_num_value.text = str(ShiftNumber)
 	box_fill_value.text = str(PercentToWin) + "%"
 	boxes_completed_value.text = str(RoundBoxes)
 	game_timer.wait_time = shiftlength
 	
+	#temp for last open build
+	music.stream_paused = GameLoader.MuteSound
 	
 	box_lable.text = str(RoundBoxes - BoxesCompleted)
 	score_lable.text = "0%"

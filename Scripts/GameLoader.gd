@@ -21,6 +21,8 @@ var DoTutorial: bool = false
 
 var is_gamepad: bool = false
 
+var MuteSound: bool = false
+
 
 
 func _input(event):
@@ -80,6 +82,16 @@ func load_level(target_path: String, intermediate_path: String):
 	# swaps scene ig, also godot hates it and ill do it defferd later ok? ok!
 	get_tree().call_deferred("change_scene_to_file",intermediate_path)
 	
+	
+	
+func Set_Mute(state:bool):
+	MuteSound = state
+	
+	
+
+
+
+
 func _process(_delta: float) -> void:
 	if not _is_loading:
 		return
@@ -105,6 +117,7 @@ func _ready():
 	else:
 		is_mobile = false
 	print(is_mobile)
+
 
 func preloadBaseScenes():
 	preload("res://Maps/Credits.tscn")

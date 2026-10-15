@@ -28,9 +28,11 @@ script = ExtResource("1_kjwww")
 
 [node name="WinSound" type="AudioStreamPlayer" parent="." unique_id=1677636427]
 stream = ExtResource("2_6475x")
+volume_db = -5.0
 
 [node name="LoseSound" type="AudioStreamPlayer" parent="." unique_id=1035609464]
 stream = ExtResource("3_d7r28")
+volume_db = -5.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=313146214]
 layout_mode = 1
