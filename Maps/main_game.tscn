@@ -43,7 +43,6 @@ background_mode = 2
 sky = SubResource("Sky_2hvsv")
 tonemap_mode = 4
 tonemap_white = 16.0
-ssr_enabled = true
 ssao_enabled = true
 ssil_radius = 7.0
 ssil_intensity = 1.63
